@@ -16,7 +16,7 @@ const player2Panel = document.querySelector('.player-1-panel')
 const player1Name = document.getElementById('name-0')
 const player2Name = document.getElementById('name-1')
 
-let scores, roundScore, activePlayer, gameOn
+let scores, roundScore, activePlayer, gameOn, previousRoll
 
 init()
 
@@ -31,10 +31,21 @@ buttonRoll.addEventListener('click', function () {
         dice1.src = '/assets/images/dice-' + dice + '.png'
 
         if (dice !== 1) {
-            roundScore += dice
-            activePlayer == 0
-                ? player1Current.textContent = roundScore
-                : player2Current.textContent = roundScore
+            if (dice == 6 && previousRoll == 6) {
+                scores[activePlayer] = 0
+                activePlayer == 0
+                    ? player1Score.textContent = scores[activePlayer]
+                    : player2Score.textContent = scores[activePlayer]
+                nextPlayer()
+                previousRoll = 0
+            } else {
+
+                previousRoll = dice
+                roundScore += dice
+                activePlayer == 0
+                    ? player1Current.textContent = roundScore
+                    : player2Current.textContent = roundScore
+            }
         } else {
             nextPlayer()
         }
@@ -74,6 +85,7 @@ buttonNew.addEventListener('click', init)
 */
 
 function nextPlayer() {
+    previousRoll = 0
     activePlayer === 0
         ? activePlayer = 1
         : activePlayer = 0
@@ -91,6 +103,7 @@ function nextPlayer() {
 
 function init() {
     gameOn = true
+    previousRoll = 0
     scores = [0, 0]
     roundScore = 0
     activePlayer = 0
