@@ -28,7 +28,7 @@ buttonRoll.addEventListener('click', function () {
     if (gameOn) {
         let dice = Math.floor(Math.random() * 6) + 1
         dice1.style.display = 'block'
-        dice1.src = '/assets/images/dice-' + dice + '.png'
+        dice1.src = 'assets/images/dice-' + dice + '.png'
 
         if (dice !== 1) {
             if (dice == 6 && previousRoll == 6) {
